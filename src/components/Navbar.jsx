@@ -91,7 +91,7 @@ const Navbar = () => {
                 <motion.button
                   key={id}
                   onClick={downloadResume}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-sora text-sm uppercase tracking-widest px-4 py-2 rounded-md transition-colors duration-300"
+                  className="bg-primary-600 hover:bg-primary-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-sora text-sm uppercase tracking-widest px-4 py-2 rounded-md transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -156,7 +156,7 @@ const Navbar = () => {
                       downloadResume();
                       setIsMenuOpen(false);
                     }}
-                    className="block w-full text-left py-2 bg-blue-600 hover:bg-blue-700 text-white font-sora text-sm uppercase tracking-widest px-4 rounded-md transition-colors duration-300 mt-2"
+                    className="block w-full text-left py-2 bg-primary-600 hover:bg-primary-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-sora text-sm uppercase tracking-widest px-4 rounded-md transition-colors duration-300 mt-2"
                   >
                     {label}
                   </motion.button>
