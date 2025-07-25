@@ -8,7 +8,8 @@ const navLinks = [
   { id: 'work', label: 'Work' },
   // { id: 'blog', label: 'Blog' },
   // { id: 'values', label: 'Values' },
-  { id: 'contact', label: 'Contact' }
+  { id: 'contact', label: 'Contact' },
+  { id: 'resume', label: 'ResumÉ', isResume: true }
 ];
 
 const Navbar = () => {
@@ -49,6 +50,16 @@ const Navbar = () => {
     }
   };
 
+  const downloadResume = () => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = '/resume.pdf'; // Place your resume.pdf in the public folder
+    link.download = 'Nihar_C_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -75,28 +86,40 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map(({ id, label }) => (
-              <motion.a
-                key={id}
-                href={`#${id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo(id);
-                }}
-                className={`relative text-primary-700/80 hover:text-primary-900 dark:text-dark-200/80 dark:hover:text-dark-50 font-sora text-sm uppercase tracking-widest ${
-                  activeSection === id ? 'text-primary-900 dark:text-dark-50' : ''
-                }`}
-                whileHover={{ scale: 1.05 }}
-              >
-                {label}
-                <motion.span
-                  className="absolute bottom-0 left-0 w-full h-px bg-primary-700 dark:bg-dark-200"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  animate={{ scaleX: activeSection === id ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
+            {navLinks.map(({ id, label, isResume }) => (
+              isResume ? (
+                <motion.button
+                  key={id}
+                  onClick={downloadResume}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-sora text-sm uppercase tracking-widest px-4 py-2 rounded-md transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {label}
+                </motion.button>
+              ) : (
+                <motion.a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    smoothScrollTo(id);
+                  }}
+                  className={`relative text-primary-700/80 hover:text-primary-900 dark:text-dark-200/80 dark:hover:text-dark-50 font-sora text-sm uppercase tracking-widest ${
+                    activeSection === id ? 'text-primary-900 dark:text-dark-50' : ''
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {label}
+                  <motion.span
+                    className="absolute bottom-0 left-0 w-full h-px bg-primary-700 dark:bg-dark-200"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    animate={{ scaleX: activeSection === id ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.a>
+              )
             ))}
             <ThemeToggle />
           </div>
@@ -125,19 +148,32 @@ const Navbar = () => {
             className="md:hidden bg-primary-100/80 dark:bg-dark-800/80 backdrop-blur-sm"
           >
             <div className="container mx-auto px-4 py-4">
-              {navLinks.map(({ id, label }) => (
-                <motion.a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    smoothScrollTo(id);
-                    setIsMenuOpen(false);
-                  }}
-                  className="block py-2 text-primary-700/80 hover:text-primary-900 dark:text-dark-200/80 dark:hover:text-dark-50 font-sora text-sm uppercase tracking-widest"
-                >
-                  {label}
-                </motion.a>
+              {navLinks.map(({ id, label, isResume }) => (
+                isResume ? (
+                  <motion.button
+                    key={id}
+                    onClick={() => {
+                      downloadResume();
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 bg-blue-600 hover:bg-blue-700 text-white font-sora text-sm uppercase tracking-widest px-4 rounded-md transition-colors duration-300 mt-2"
+                  >
+                    {label}
+                  </motion.button>
+                ) : (
+                  <motion.a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      smoothScrollTo(id);
+                      setIsMenuOpen(false);
+                    }}
+                    className="block py-2 text-primary-700/80 hover:text-primary-900 dark:text-dark-200/80 dark:hover:text-dark-50 font-sora text-sm uppercase tracking-widest"
+                  >
+                    {label}
+                  </motion.a>
+                )
               ))}
             </div>
           </motion.div>
