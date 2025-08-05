@@ -17,11 +17,11 @@ const projects = [
     image: '/images/taqneeq.png'
   },
   {
-    title: 'Social Conclave Website',
-    description: 'A website for a environmental debate competition (down for maintenance)',
-    technologies: ['Next.js'],
-    link: 'https://www.socialconclave.in',
-    image: '/images/conclave.jpeg'
+    title: "Dr. Nikhil's Smilekraft Dental Clinic",
+    description: 'A website for a dental clinic',
+    technologies: ['React', 'TailwindCSS'],
+    link: 'https://www.smilekraftdental.com',
+    image: '/images/cliniclogo.jpg'
   }
 ];
 
@@ -81,13 +81,16 @@ const Work = () => {
                       </span>
                     ))}
                   </div>
-                  <motion.a
-                    href={project.link}
-                    className="inline-block text-gray-800/80 dark:text-white/80 hover:text-gray-900 dark:hover:text-white font-sora text-sm uppercase tracking-widest"
-                    whileHover={{ x: 5 }}
-                  >
-                    View Project →
-                  </motion.a>
+                  <motion.div whileHover={{ x: 5 }}>
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-gray-800/80 dark:text-white/80 hover:text-gray-900 dark:hover:text-white font-sora text-sm uppercase tracking-widest cursor-pointer relative z-10"
+                    >
+                      View Project →
+                    </a>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
